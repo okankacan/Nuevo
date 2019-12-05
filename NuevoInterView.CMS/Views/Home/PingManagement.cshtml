@@ -1,0 +1,92 @@
+﻿
+@model List<PingControl>
+
+@{
+    ViewData["Title"] = "PingManagement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    td, th {
+        white-space: nowrap;
+        padding: 5px 10px !important;
+    }
+</style>
+<div class="row">
+    <h2>
+        Ping Management
+
+        <a asp-action="Create" class="btn btn-send btn-primary btn-xs pull-right"><i class="fa fa-pencil"></i> Create</a>
+
+    </h2>
+</div>
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        @if (Model.Any())
+        {
+            <div class="adv-table">
+                <div id="example_wrapper" class="table-responsive">
+                    <table class="table table-bordered table-striped" id="example">
+                        <thead>
+                            <tr role="row">
+                                <th></th>
+                                <th></th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Id</th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Name</th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Url</th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1">IsActive</th>
+
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1">CreateDate</th>
+
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            @foreach (var item in Model.ToList())
+                            {
+                                <tr class="gradeX odd">
+                                    <td>
+                                        <a asp-action="Edit" asp-all-route-data='new Dictionary<string, string> { { "Id",@item.Id.ToString() } }' class="btn btn-send btn-primary btn-xs"><i class="fa fa-eye"></i> Seç</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="PinControl" asp-all-route-data='new Dictionary<string, string> { { "Id",@item.Id.ToString() } }' class="btn btn-send btn-primary btn-xs"><i class="fas fa-map-pin"></i> Ping</a>
+                                    </td>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Url</td>
+                                    <td>
+                                        @if (item.IsActive)
+                                        {
+                                            <i class="fa fa-check center"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-times center"></i>
+                                        }
+                                    </td>
+                                    <td>@item.CreateDate.ToShortDateString()</td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<style>
+    .dataTable tr td:last-child, .dataTable tr th:last-child {
+        display: block;
+    }
+</style>

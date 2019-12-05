@@ -1,0 +1,1 @@
+apsetting email göndermek  ve db için gerekli düzenlemeleri yapmanız gerekiyor. teşekkürler.

@@ -1,0 +1,191 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewData["description"]">
+    <meta name="author" content="@ViewData["author"]">
+    <meta name="keyword" content="@ViewData["Keywords"]">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>@ViewData["Title"] - InGameCore.WebUI.CMS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+
+    <link href="/assets/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/multiple-select.css" type="text/css">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+
+    @RenderSection("Styles", required: false)
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section id="container">
+        <header class="header white-bg">
+            <div id="sidebarLogo">
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                </div>
+                <div class="logoStart">
+                    <!--logo start-->
+                    <a asp-action="index" asp-controller="Home" class="logo">  Anasayfa </a>
+                    <!--logo end-->
+                </div>
+
+
+            </div>
+
+
+            <div class="top-nav ">
+                <!--search & user info start-->
+
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <input type="text" class="form-control search" placeholder="Search">
+                    </li>
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="~/img/avatar1_small.jpg">
+
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                  
+
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                            <li><a href="#"><i class="fa fa-bell-o"></i> Notification </a></li>
+                            <li><a asp-controller="Account" asp-action="logout">Exit <i class="fa fa-key"></i></a></li>
+
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+
+
+            </div>
+        </header>
+        <!--header start-->
+      
+        <!--header end-->
+        <!--sidebar start-->
+
+        @await Component.InvokeAsync("LeftMenuComponent")
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/js/jquery.scrollTo.min.js"></script>
+    <script src="/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/js/owl.carousel.js"></script>
+    <script src="/js/jquery.customSelect.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <script src="/js/jscolor.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="~/js/multiple-select.js"></script>
+
+    <!--common script for all pages-->
+    <script src="/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="/js/sparkline-chart.js"></script>
+    <script src="/js/easy-pie-chart.js"></script>
+    <script src="/js/count.js"></script>
+
+    <script>
+
+        var path = window.location.pathname.split('/');
+        var pageUrl = "/"+path[1];
+        var sidebarMenuItems = document.querySelectorAll('.sidebar-menu li a');
+        sidebarMenuItems.forEach(function (item) {
+            if (item.getAttribute("href") === pageUrl) {
+                item.classList.add("active");
+            }
+        });
+
+        //owl carousel
+
+        $(document).ready(function () {
+            LayoutPageDocument();
+
+            if ($("#IsVideo").is(':checked')) {
+                $('#SlideFile').hide();
+                $("#videoUrl").show();
+            } else {
+                $('#SlideFile').show();
+                $("#videoUrl").hide();
+            }
+        });
+
+        //custom select box
+
+        $('#IsVideo').live('change', function () {
+            if ($(this).is(':checked')) {
+                $('#SlideFile').fadeOut();
+                $('#videoUrl').fadeIn();
+            } else {
+                $('#SlideFile').fadeIn();
+                $('#videoUrl').fadeOut();
+            }
+        });
+
+    </script>
+
+    <script src="/js/lib/site.js"></script>
+    <script src="/js/jquery.maskedinput.js"></script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#selectedImage').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#file").change(function () {
+            readURL(this);
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
